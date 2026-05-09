@@ -4,70 +4,314 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     
-    <title>Jefferson Personal | Treinador Premium</title>
-    <meta name="description" content="Jefferson Personal Trainer. Especialista em hipertrofia, condicionamento físico e emagrecimento para resultados de alta performance e duradouros.">
-    <meta name="keywords" content="jefferson personal trainer, treinador físico, personal trainer online, hipertrofia, consultoria esportiva, emagrecimento, alta performance">
-    <meta name="author" content="Jefferson Personal">
-    <meta name="robots" content="index, follow">
-
-    <meta name="theme-color" content="#f4f4f6" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#050505" media="(prefers-color-scheme: dark)">
-
-    <meta property="og:title" content="Jefferson Personal | Treinador Premium">
-    <meta property="og:description" content="Treinamento de excelência para quem busca força, definição e mudança real de hábitos.">
-    <meta property="og:image" content="./image/logo.jpeg">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="pt_BR">
+    <title>Jeff Espadin | Personal Trainer Premium</title>
+    <meta name="description" content="Jeff Espadin Personal Trainer. Resultados reais com estratégia, consistência e acompanhamento profissional.">
+    
+    <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#030303" media="(prefers-color-scheme: dark)">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIÁVEIS CSS (TEMA PREMIUM ESCURO) --- */
+        :root {
+            --bg-color: #030303; 
+            --section-bg-color: #0A0A0A; 
+            --card-bg-color: #121212;
+            --text-main-color: #FFFFFF; 
+            --text-secondary-color: #999999; 
+            --accent-color: #FFFFFF; 
+            --accent-subtle: rgba(255, 255, 255, 0.05);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --shadow-premium: 0 24px 48px -12px rgba(0, 0, 0, 0.8);
+            --input-bg: rgba(255, 255, 255, 0.03);
+            
+            --title-font: 'Playfair Display', serif; 
+            --font-body: 'Montserrat', sans-serif;
+            
+            --max-width: 900px;
+            --border-radius-card: 24px;
+            --border-radius-btn: 50px; 
+        }
+
+        /* --- TEMA PREMIUM CLARO --- */
+        body.light-theme {
+            --bg-color: #F8F8F8; 
+            --section-bg-color: #FFFFFF; 
+            --card-bg-color: #FFFFFF;
+            --text-main-color: #050505; 
+            --text-secondary-color: #666666; 
+            --accent-color: #000000; 
+            --accent-subtle: rgba(0, 0, 0, 0.03);
+            --border-glass: rgba(0, 0, 0, 0.06);
+            --shadow-premium: 0 24px 48px -12px rgba(0, 0, 0, 0.06);
+            --input-bg: rgba(0, 0, 0, 0.02);
+        }
+
+        /* --- RESET E CLASSES UTILITÁRIAS --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-body); }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body { background-color: var(--bg-color); color: var(--text-main-color); line-height: 1.7; overflow-x: hidden; transition: background-color 0.6s ease, color 0.6s ease; font-weight: 300;}
+        a { text-decoration: none; color: inherit; outline: none; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+        button, a, .card, .btn { transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+        
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: opacity, transform;
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        .container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+        .theme-toggle, .share-toggle, .share-menu button {
+            background: rgba(var(--section-bg-color), 0.8); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass);
+            color: var(--text-main-color); 
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            box-shadow: var(--shadow-premium);
+        }
+        
+        .theme-toggle { position: fixed; top: 24px; right: 24px; z-index: 1000; width: 48px; height: 48px; border-radius: 50%; }
+        .share-container { position: fixed; top: 24px; left: 24px; z-index: 1000; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+        .share-toggle { width: 48px; height: 48px; border-radius: 50%; }
+        
+        .theme-toggle:hover, .share-toggle:hover, .share-menu button:hover { 
+            transform: translateY(-3px) scale(1.05); 
+            background: var(--text-main-color); 
+            color: var(--bg-color); 
+        }
+        
+        .share-menu { display: flex; flex-direction: column; gap: 10px; opacity: 0; pointer-events: none; transform: translateY(-15px); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+        .share-menu.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
+        .share-menu button { width: 42px; height: 42px; border-radius: 50%; }
+
+        .hero { min-height: 85vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px 20px; }
+        .hero-logo { width: 100%; max-width: 320px; margin: 0 auto 25px; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2)); }
+        
+        .hero-title { font-family: var(--title-font); font-size: 2.5rem; font-weight: 400; color: var(--text-main-color); margin-bottom: 5px; letter-spacing: 1px; }
+        .hero-subtitle { font-size: 0.85rem; color: var(--text-secondary-color); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 30px; font-weight: 600; }
+        
+        .hero-bio { font-size: 1.15rem; color: var(--text-secondary-color); font-weight: 300; max-width: 550px; margin: 0 auto 40px; line-height: 1.8; letter-spacing: 0.5px; }
+        
+        .action-grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; width: 100%; max-width: 500px;}
+        .btn-action {
+            flex: 1; min-width: 200px;
+            background: transparent; border: 1px solid var(--border-glass);
+            border-radius: var(--border-radius-btn); padding: 18px 25px; 
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            box-shadow: var(--shadow-premium); backdrop-filter: blur(5px);
+        }
+        .btn-action:hover { background: var(--text-main-color); border-color: var(--text-main-color); transform: translateY(-5px); }
+        .btn-action i { font-size: 1.2rem; color: var(--text-main-color); transition: 0.4s; }
+        .btn-action span { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--text-main-color); transition: 0.4s;}
+        .btn-action:hover i, .btn-action:hover span { color: var(--bg-color); }
+
+        section { padding: 80px 0; }
+        .section-header { margin-bottom: 50px; text-align: center; }
+        .section-header h2 { font-family: var(--title-font); font-size: 2.8rem; color: var(--text-main-color); font-weight: 400; line-height: 1.1; margin-bottom: 15px; }
+        .section-subtitle { font-size: 0.9rem; color: var(--text-secondary-color); font-weight: 400; text-transform: uppercase; letter-spacing: 3px; }
+
+        .card {
+            background: var(--card-bg-color); border: 1px solid var(--border-glass);
+            border-radius: var(--border-radius-card); padding: 50px 40px; 
+            box-shadow: var(--shadow-premium);
+        }
+        
+        .about-wrapper { display: flex; flex-direction: column; align-items: center; gap: 50px; text-align: center; }
+        @media(min-width: 768px) { .about-wrapper { flex-direction: row; text-align: left; align-items: center; } }
+        
+        .about-profile-pic { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border-glass); box-shadow: var(--shadow-premium); flex-shrink: 0; margin: 0 auto; filter: grayscale(20%); transition: 0.5s; }
+        .about-profile-pic:hover { filter: grayscale(0%); transform: scale(1.02); }
+        
+        .about-content { flex: 1; }
+        .about-title { font-size: 2rem; font-weight: 400; color: var(--text-main-color); margin-bottom: 20px; font-family: var(--title-font);}
+        .about-title span { display: block; font-family: var(--font-body); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; font-weight: 600; margin-top: 10px; color: var(--text-secondary-color);}
+        
+        .about-text { font-size: 1rem; color: var(--text-secondary-color); margin-bottom: 15px; line-height: 1.8; font-weight: 300;}
+        .highlight { color: var(--text-main-color); font-weight: 500; }
+        
+        .about-stats { display: flex; gap: 30px; margin-top: 40px; justify-content: center; flex-wrap: wrap; border-top: 1px solid var(--border-glass); padding-top: 30px;}
+        @media(min-width: 768px) { .about-stats { justify-content: flex-start; } }
+        .stat-item { text-align: center; flex: 1; min-width: 100px;}
+        .stat-number { font-size: 2.2rem; font-weight: 400; color: var(--text-main-color); font-family: var(--title-font); margin-bottom: 5px;}
+        .stat-label { font-size: 0.7rem; text-transform: uppercase; color: var(--text-secondary-color); font-weight: 600; letter-spacing: 2px;}
+
+        .benefits-list { max-width: 600px; margin: 0 auto 40px; }
+        .benefits-list li { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; font-size: 1.05rem; font-weight: 400; color: var(--text-main-color); border-bottom: 1px solid var(--border-glass); padding-bottom: 15px;}
+        .benefits-list li:last-child { border-bottom: none; }
+        .benefits-list i { color: var(--text-main-color); font-size: 1.2rem; opacity: 0.7; }
+
+        .carousel-wrapper { margin: 0 -24px; padding: 10px 24px 40px 24px; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; }
+        .carousel-wrapper::-webkit-scrollbar { display: none; }
+        .carousel-track { display: flex; gap: 30px; }
+
+        /* --- RESULTADOS CARDS --- */
+        .resultado-card {
+            flex: 0 0 300px; height: 350px; 
+            border-radius: var(--border-radius-card); overflow: hidden; box-shadow: var(--shadow-premium);
+            border: 1px solid var(--border-glass); background: var(--card-bg-color);
+            display: flex; align-items: center; justify-content: center;
+            padding: 15px; 
+        }
+        
+        .resultado-card img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; 
+            display: block;
+            border-radius: 12px; 
+        }
+
+        .plan-card {
+            flex: 0 0 320px; background: var(--card-bg-color); border: 1px solid var(--border-glass);
+            border-radius: var(--border-radius-card); padding: 50px 35px; box-shadow: var(--shadow-premium);
+            display: flex; flex-direction: column; position: relative; text-align: center;
+        }
+        .plan-card.featured { border-color: var(--text-main-color); background: var(--accent-subtle); }
+        
+        .plan-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--text-main-color); color: var(--bg-color); padding: 8px 24px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; border-radius: 30px; letter-spacing: 2px; white-space: nowrap; }
+        .gender-highlight { display: inline-block; font-size: 0.65rem; font-weight: 600; color: var(--text-secondary-color); border: 1px solid var(--border-glass); padding: 6px 16px; border-radius: 30px; text-transform: uppercase; margin: 0 auto 15px; letter-spacing: 1px;}
+        
+        .plan-title { font-family: var(--title-font); font-size: 2rem; font-weight: 400; color: var(--text-main-color); margin-bottom: 10px; }
+        .plan-price { font-size: 2.5rem; font-weight: 300; color: var(--text-main-color); margin: 20px 0 5px; font-family: var(--font-body); letter-spacing: -1px;}
+        .plan-price-sub { font-size: 0.85rem; color: var(--text-secondary-color); margin-bottom: 35px; font-weight: 400;}
+        
+        .plan-features { margin-bottom: 40px; flex-grow: 1; text-align: left;}
+        .plan-features li { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; font-size: 0.95rem; color: var(--text-secondary-color); font-weight: 300;}
+        .plan-features i { font-size: 0.8rem; color: var(--text-main-color); opacity: 0.5;}
+        
+        .bonus-highlight { color: var(--text-main-color); font-weight: 500; margin-top: 25px; display: flex; align-items: center; gap: 10px; font-size: 0.85rem; background: var(--accent-subtle); padding: 15px; border-radius: 12px; border: 1px solid var(--border-glass); justify-content: center;}
+        
+        .btn-solid { width: 100%; background: var(--text-main-color); color: var(--bg-color); border: none; border-radius: var(--border-radius-btn); padding: 20px; font-weight: 600; text-transform: uppercase; font-size: 0.85rem; cursor: pointer; text-align: center; letter-spacing: 2px;}
+        .btn-outline { width: 100%; background: transparent; color: var(--text-main-color); border: 1px solid var(--border-glass); border-radius: var(--border-radius-btn); padding: 19px; font-weight: 600; text-transform: uppercase; font-size: 0.85rem; cursor: pointer; text-align: center; letter-spacing: 2px;}
+        .btn-solid:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(255,255,255,0.1); opacity: 0.9;}
+        .btn-outline:hover { background: var(--text-main-color); color: var(--bg-color); border-color: var(--text-main-color); transform: translateY(-3px);}
+
+        .faq-container { display: flex; flex-direction: column; gap: 15px; }
+        .faq-item { background: transparent; border-bottom: 1px solid var(--border-glass); transition: all 0.3s ease; }
+        .faq-item summary { padding: 25px 0; font-weight: 400; color: var(--text-main-color); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem; letter-spacing: 0.5px; }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary::after { content: '+'; font-family: 'Montserrat'; font-weight: 300; font-size: 1.5rem; color: var(--text-secondary-color); transition: transform 0.4s ease; }
+        .faq-item[open] summary::after { transform: rotate(45deg); color: var(--text-main-color); }
+        .faq-body { padding: 0 0 30px 0; color: var(--text-secondary-color); font-size: 0.95rem; line-height: 1.8; font-weight: 300; }
+
+        .form-group { margin-bottom: 25px; } 
+        .form-label { display: block; font-size: 0.75rem; color: var(--text-secondary-color); margin-bottom: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+        .form-input, .form-select { width: 100%; padding: 18px 20px; border-radius: 12px; border: 1px solid var(--border-glass); background: var(--input-bg); color: var(--text-main-color); font-size: 1rem; outline: none; transition: all 0.3s; font-weight: 300;}
+        textarea.form-input { resize: vertical; min-height: 120px; }
+        .form-input:focus, .form-select:focus { border-color: var(--text-main-color); background: transparent; }
+        .form-row { display: flex; gap: 20px; flex-wrap: wrap; }
+        .form-row .form-group { flex: 1; min-width: 150px; }
+
+        .cta-final { background: var(--text-main-color); border-radius: var(--border-radius-card); padding: 80px 30px; text-align: center; display: block; margin-bottom: 60px; box-shadow: var(--shadow-premium);}
+        .cta-final:hover { transform: translateY(-5px) scale(1.01); }
+        .cta-final h2 { font-family: var(--title-font); font-size: 2.4rem; color: var(--bg-color); margin-bottom: 15px; font-weight: 400; line-height: 1.2;}
+        .cta-final p { color: var(--bg-color); opacity: 0.8; margin-bottom: 40px; font-weight: 400; font-size: 1.1rem;}
+        .cta-btn-inner { background: var(--bg-color); color: var(--text-main-color); display: inline-flex; align-items: center; gap: 12px; padding: 20px 45px; border-radius: var(--border-radius-btn); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px; }
+        .cta-btn-inner i { font-size: 1.2rem;}
+
+        footer { text-align: center; padding: 50px 20px; border-top: 1px solid var(--border-glass); font-size: 0.8rem; color: var(--text-secondary-color); margin-top: 20px; font-weight: 300; letter-spacing: 1px;}
+        .footer-socials { display: flex; justify-content: center; gap: 25px; margin-bottom: 25px; }
+        .footer-socials a { font-size: 1.5rem; color: var(--text-secondary-color); transition: 0.3s;}
+        .footer-socials a:hover { color: var(--text-main-color); transform: translateY(-3px); }
+        
+        @media (max-width: 768px) {
+            .section-header h2, .cta-final h2 { font-size: 2.2rem; }
+            .hero { min-height: 70vh; }
+            .card { padding: 40px 25px; }
+        }
+    </style>
 </head>
 <body>
     <div class="bg-fixed"></div>
 
     <div class="share-container">
-        <button class="share-toggle" onclick="toggleShareMenu()"><i class="fas fa-share-alt"></i></button>
+        <button class="share-toggle" onclick="toggleShareMenu()" aria-label="Compartilhar Link">
+            <i class="fas fa-share-alt"></i>
+        </button>
         <div class="share-menu" id="shareMenu">
-            <button onclick="shareLink('whatsapp')"><i class="fab fa-whatsapp"></i></button>
-            <button onclick="shareLink('facebook')"><i class="fab fa-facebook-f"></i></button>
-            <button onclick="shareLink('copy')"><i class="fas fa-copy"></i></button>
+            <button onclick="shareLink('whatsapp')" aria-label="Compartilhar no WhatsApp"><i class="fab fa-whatsapp"></i></button>
+            <button onclick="shareLink('facebook')" aria-label="Compartilhar no Facebook"><i class="fab fa-facebook-f"></i></button>
+            <button onclick="shareLink('tiktok')" aria-label="Copiar link para TikTok"><i class="fab fa-tiktok"></i></button>
+            <button onclick="shareLink('youtube')" aria-label="Copiar link para YouTube"><i class="fab fa-youtube"></i></button>
         </div>
     </div>
 
-    <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-sun"></i></button>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar Tema Claro/Escuro">
+        <i class="fas fa-sun"></i>
+    </button>
 
     <main class="container">
         
         <header class="hero fade-up">
-            <h1 class="sr-only">Jefferson Personal - Treinador Premium</h1>
-            <img src="./image/logo.jpeg" alt="Logo Jefferson Personal" class="hero-logo">
-            <p class="hero-bio">Metodologia exclusiva focada em força, hipertrofia e resultados definitivos de alta performance. Design feito para quem exige o melhor.</p>
-            <nav class="action-grid">
-                <a href="https://wa.me/5511969908406" class="btn-action"><i class="fab fa-whatsapp"></i> <span>Falar Agora</span></a>
-                <a href="#results" class="btn-action"><i class="fas fa-award"></i> <span>Resultados</span></a>
-                <a href="#planos" class="btn-action"><i class="fas fa-laptop-house"></i> <span>Planos Online</span></a>
+            <h1 class="sr-only">Jeff Espadin - Personal Trainer Premium</h1>
+            <img src="logo.jpeg" alt="Logotipo Jeff Espadin" class="hero-logo">
+            
+            <h2 class="hero-title">JEFF ESPADIN</h2>
+            <div class="hero-subtitle">Personal Trainer</div>
+            
+            <p class="hero-bio">Resultados reais com estratégia, consistência e acompanhamento profissional.</p>
+            
+            <nav class="action-grid" aria-label="Links principais">
+                <a href="https://wa.me/5511969908406" class="btn-action">
+                    <i class="fab fa-whatsapp"></i> <span>Falar Agora</span>
+                </a>
+                <a href="#planos-consultoria" class="btn-action">
+                    <i class="fas fa-arrow-down"></i> <span>Ver Planos</span>
+                </a>
             </nav>
         </header>
 
         <section id="sobre">
             <div class="section-header fade-up">
+                <span class="section-subtitle">A Excelência Em Foco</span>
                 <h2>Sobre o Treinador</h2>
             </div>
-            <article class="card about-wrapper fade-up">
-                <div class="about-profile-pic">
-                    <img src="./image/perfil.jpeg" alt="Jefferson Personal">
-                </div>
+            <article class="card about-wrapper fade-up" style="transition-delay: 0.1s;">
+                <img src="perfil.jpeg" alt="Foto de Jeff Espadin" class="about-profile-pic">
+                
                 <div class="about-content">
-                    <h3 class="about-title">Jefferson Personal | <span class="highlight">Alta Performance</span></h3>
-                    <p class="about-text">Com ampla experiência na área da Educação Física, Jefferson é especialista em transformação física estratégica, unindo ciência e prática real.</p>
-                    <p class="about-text">Seus programas são estruturados com foco em <span class="highlight">constância, progressão segura e eficiência máxima</span>, proporcionando uma evolução contínua do seu físico.</p>
+                    <h3 class="about-title">
+                        Jeff Espadin
+                        <span>Personal Trainer Premium</span>
+                    </h3>
+                    
+                    <p class="about-text">
+                        Sou Jeff Espadin, Personal Trainer há <span class="highlight">mais de 15 anos</span>.
+                    </p>
+                    
+                    <p class="about-text">
+                        Ao longo da minha trajetória, ajudei dezenas de alunos a conquistarem não apenas estética, mas <span class="highlight">saúde, performance e qualidade de vida</span>.
+                    </p>
+                    
+                    <p class="about-text">
+                        Meu trabalho vai além de montar treinos. Cada aluno é <span class="highlight">acompanhado de forma individual</span>, com ajustes constantes e foco em <span class="highlight">evolução real</span>.
+                    </p>
+
                     <div class="about-stats">
-                        <div class="stat-item"><div class="stat-number">+15</div><div class="stat-label">Anos Exp.</div></div>
-                        <div class="stat-item"><div class="stat-number">Elite</div><div class="stat-label">Treinamento</div></div>
-                        <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">Personalizado</div></div>
+                        <div class="stat-item">
+                            <div class="stat-number">+15</div>
+                            <div class="stat-label">Anos<br>Experiência</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">Elite</div>
+                            <div class="stat-label">Alta<br>Performance</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Foco em<br>Resultados</div>
+                        </div>
                     </div>
                 </div>
             </article>
@@ -75,298 +319,484 @@
 
         <section id="metodologia">
             <article class="card fade-up">
-                <h3 class="about-title methodology-heading">Metodologia: <span class="highlight">Mudança Estrutural ⚙️</span></h3>
-                <p class="about-text methodology-desc">Planejamento focado na construção de massa e queima inteligente, desenhado exclusivamente para a sua biomecânica.</p>
-                <ul class="benefits-list methodology-benefits">
-                    <li><i class="fas fa-fire-alt"></i> Queima de Gordura Estratégica</li>
-                    <li><i class="fas fa-dumbbell"></i> Hipertrofia Acelerada</li>
-                    <li><i class="fas fa-leaf"></i> Hábitos Reais e Sustentáveis</li>
-                </ul>
+                <h3 class="about-title" style="text-align: center; margin-bottom: 25px;">
+                    Não trabalho com <span class="highlight" style="font-family: var(--title-font); font-style: italic;">treinos prontos.</span>
+                </h3>
+                
+                <p class="about-text" style="text-align: center; font-size: 1.1rem; max-width: 700px; margin: 0 auto 30px;">
+                    Cada estratégia é minuciosamente construída de acordo com:
+                </p>
+                
+                <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 40px;">
+                    <span style="font-size: 1.1rem; color: var(--text-main-color); font-weight: 500; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-check" style="color: var(--text-secondary-color); font-size: 0.9rem;"></i> Seu nível
+                    </span>
+                    <span style="font-size: 1.1rem; color: var(--text-main-color); font-weight: 500; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-check" style="color: var(--text-secondary-color); font-size: 0.9rem;"></i> Sua rotina
+                    </span>
+                    <span style="font-size: 1.1rem; color: var(--text-main-color); font-weight: 500; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-check" style="color: var(--text-secondary-color); font-size: 0.9rem;"></i> Seu objetivo
+                    </span>
+                </div>
+
+                <div style="text-align: center; padding-top: 30px; border-top: 1px solid var(--border-glass);">
+                    <p class="about-text" style="margin-bottom: 0; font-size: 1.15rem;">
+                        O foco não é apenas treinar.<br>
+                        É <span class="highlight">evoluir com consistência e segurança</span>.
+                    </p>
+                </div>
             </article>
         </section>
 
-        <section id="diferencial">
-            <div class="card news-card fade-up">
-                <div class="news-badge">Por que escolher?</div>
-                <h2 class="news-title">DIFERENCIAL</h2>
-                <div class="diferencial-list">
-                    <div class="diferencial-item">
-                        <i class="fas fa-eye"></i>
-                        <span>Correção em tempo real</span>
-                    </div>
-                    <div class="diferencial-item">
-                        <i class="fas fa-user-check"></i>
-                        <span>Acompanhamento individual</span>
-                    </div>
-                    <div class="diferencial-item">
-                        <i class="fas fa-chart-line"></i>
-                        <span>Evolução progressiva</span>
-                    </div>
-                    <div class="diferencial-item">
-                        <i class="fas fa-shield-alt"></i>
-                        <span>Segurança na execução</span>
-                    </div>
-                    <div class="diferencial-item">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>Treino adaptado à rotina</span>
-                    </div>
+        <section id="perfil-ideal">
+            <div class="section-header fade-up">
+                <span class="section-subtitle">Alinhamento de Expectativas</span>
+                <h2>Para Quem É Este Trabalho?</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <article class="card fade-up">
+                    <ul class="benefits-list" style="margin-bottom: 0;">
+                        <li><i class="fas fa-check"></i> <span>Homens e mulheres <span class="highlight">35+</span></span></li>
+                        <li><i class="fas fa-check"></i> <span>Pessoas com <span class="highlight">rotina corrida</span></span></li>
+                        <li><i class="fas fa-check"></i> <span>Buscam <span class="highlight">saúde e estética</span></span></li>
+                        <li><i class="fas fa-check"></i> <span>Querem resultado com <span class="highlight">orientação profissional</span></span></li>
+                        <li style="border-bottom: none; padding-bottom: 0;"><i class="fas fa-check"></i> <span>Estão <span class="highlight">cansados de tentar sozinhos</span></span></li>
+                    </ul>
+                </article>
+
+                <article class="card fade-up" style="border-color: var(--text-main-color);">
+                    <h3 class="about-title" style="font-size: 1.3rem; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px;">
+                        Nosso <span class="highlight">DIFERENCIAL</span>
+                    </h3>
+                    <ul class="benefits-list" style="margin-bottom: 0;">
+                        <li><i class="fas fa-shield-alt"></i> <span>Correção em <span class="highlight">tempo real</span></span></li>
+                        <li><i class="fas fa-user-check"></i> <span>Acompanhamento <span class="highlight">individual</span></span></li>
+                        <li><i class="fas fa-chart-line"></i> <span>Evolução <span class="highlight">progressiva</span></span></li>
+                        <li><i class="fas fa-lock"></i> <span>Segurança na <span class="highlight">execução</span></span></li>
+                        <li style="border-bottom: none; padding-bottom: 0;"><i class="fas fa-clock"></i> <span>Treino adaptado à <span class="highlight">rotina</span></span></li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section id="resultados">
+            <div class="section-header fade-up">
+                <span class="section-subtitle">O Padrão de Entrega</span>
+                <h2>Transformações Reais</h2>
+            </div>
+
+            <div class="carousel-wrapper">
+                <div class="carousel-track">
+                    
+                    <article class="resultado-card fade-up" style="transition-delay: 0.1s;">
+                        <img src="resultado-1.jpeg" alt="Resultado de aluno antes e depois">
+                    </article>
+
+                    <article class="resultado-card fade-up" style="transition-delay: 0.2s;">
+                        <img src="resultado-2.jpeg" alt="Resultado de aluno antes e depois">
+                    </article>
+
+                    <article class="resultado-card fade-up" style="transition-delay: 0.3s;">
+                        <img src="resultado-3.jpeg" alt="Resultado de aluno antes e depois">
+                    </article>
+
                 </div>
             </div>
         </section>
 
-        <section id="results" class="results-section">
-            <div class="container fade-up">
-                <div class="section-header">
-                    <h2>Nossas Transformações</h2>
-                    <span class="section-subtitle">O resultado de quem aplicou o método #TimeJefferson</span>
+        <section id="planos-online">
+            <div class="section-header fade-up">
+                <span class="section-subtitle">Consultoria Online</span>
+                <h2>Projetos de Evolução</h2>
+            </div>
+
+            <div class="carousel-wrapper">
+                <div class="carousel-track">
+                    
+                    <article class="plan-card fade-up" style="transition-delay: 0.1s;">
+                        <span class="gender-highlight">Ciclo: Mensal</span>
+                        <h3 class="plan-title">Start</h3>
+                        <div class="plan-price">R$ 497</div>
+                        <div class="plan-price-sub">Pagamento Único</div> 
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> Anamnese e Planejamento</li>
+                            <li><i class="fas fa-check"></i> Treino personalizado via App</li>
+                            <li><i class="fas fa-check"></i> Suporte convencional</li>
+                        </ul>
+                        <button onclick="escolherPlano('Plano Online Mensal')" class="btn-outline">Selecionar Projeto</button>
+                    </article>
+
+                    <article class="plan-card fade-up" style="transition-delay: 0.2s;">
+                        <span class="gender-highlight">Ciclo: Trimestral</span>
+                        <h3 class="plan-title">Prime</h3>
+                        <div class="plan-price">R$ 1.350</div>
+                        <div class="plan-price-sub">Equivale a R$ 450/mês</div>
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> Todos os benefícios do Start</li>
+                            <li><i class="fas fa-check"></i> Periodização Completa</li>
+                            <li><i class="fas fa-check"></i> Acompanhamento Próximo</li>
+                        </ul>
+                        <button onclick="escolherPlano('Plano Online Trimestral')" class="btn-outline">Selecionar Projeto</button>
+                    </article>
+
+                    <article class="plan-card featured fade-up" style="transition-delay: 0.3s;">
+                        <span class="plan-badge">Resultados Máximos</span>
+                        <span class="gender-highlight" style="border-color: transparent;">Ciclo: Semestral</span>
+                        <h3 class="plan-title">Elite</h3>
+                        <div class="plan-price">R$ 2.400</div>
+                        <div class="plan-price-sub">Equivale a R$ 400/mês</div>
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> Mapeamento de Performance</li>
+                            <li><i class="fas fa-check"></i> Troca de ciclos estratégica</li>
+                            <li><i class="fas fa-check"></i> Prioridade Máxima Suporte</li>
+                            <span class="bonus-highlight">💡 Economia de R$ 582 comparado ao mensal</span>
+                        </ul>
+                        <button onclick="escolherPlano('Plano Online Semestral')" class="btn-solid">Selecionar Projeto</button>
+                    </article>
+
                 </div>
-                <div class="carousel-outer">
+            </div>
+        </section>
 
-                    <button class="carousel-btn carousel-prev">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
+        <section id="entregas-online" style="padding-top: 20px;">
+            <article class="card fade-up" style="border-color: var(--text-main-color); text-align: center; background: var(--accent-subtle);">
+                <div style="margin-bottom: 50px;">
+                    <h3 class="about-title" style="margin-bottom: 20px;">
+                        Você não recebe apenas um <span class="highlight" style="font-family: var(--title-font); font-style: italic;">treino.</span>
+                    </h3>
+                    <p class="about-text" style="font-size: 1.15rem; margin-bottom: 30px; color: var(--text-main-color);">Você recebe:</p>
+                    <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+                        <span style="font-size: 1.1rem; color: var(--text-main-color); font-weight: 500; display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-compass" style="color: var(--text-secondary-color); font-size: 1.2rem;"></i> Direcionamento
+                        </span>
+                        <span style="font-size: 1.1rem; color: var(--text-main-color); font-weight: 500; display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-sliders-h" style="color: var(--text-secondary-color); font-size: 1.2rem;"></i> Ajustes constantes
+                        </span>
+                        <span style="font-size: 1.1rem; color: var(--text-main-color); font-weight: 500; display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-headset" style="color: var(--text-secondary-color); font-size: 1.2rem;"></i> Suporte contínuo
+                        </span>
+                    </div>
+                </div>
 
-                    <div class="carousel-track-container">
-                        <div class="carousel-track">
+                <div style="padding-top: 50px; border-top: 1px solid var(--border-glass);">
+                    <h3 class="about-title" style="margin-bottom: 20px; text-transform: uppercase; letter-spacing: 3px;">
+                        <span class="highlight">RESULTADO</span>
+                    </h3>
+                    <p class="about-text" style="font-size: 1.2rem; margin-bottom: 30px; color: var(--text-main-color); font-weight: 500;">
+                        Resultado não vem de sorte.
+                    </p>
+                    <p class="about-text" style="font-size: 1rem; color: var(--text-secondary-color); margin-bottom: 25px;">Vem de:</p>
+                    <div style="display: flex; justify-content: center; gap: 35px; flex-wrap: wrap;">
+                        <span style="font-size: 1.1rem; color: var(--text-main-color); font-weight: 500; display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-check-circle" style="opacity: 0.6;"></i> Método
+                        </span>
+                        <span style="font-size: 1.1rem; color: var(--text-main-color); font-weight: 500; display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-check-circle" style="opacity: 0.6;"></i> Consistência
+                        </span>
+                        <span style="font-size: 1.1rem; color: var(--text-main-color); font-weight: 500; display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-check-circle" style="opacity: 0.6;"></i> Execução correta
+                        </span>
+                    </div>
+                </div>
+            </article>
+        </section>
 
-                            <article class="carousel-item result-card active">
-                                <div class="result-image-wrapper">
-                                    <img src="./image/resultado-1.jpeg" alt="Resultado de aluno 1" class="result-image">
-                                </div>
-                            </article>
+        <section id="planos-presenciais">
+            <div class="section-header fade-up">
+                <span class="section-subtitle">Personal Presencial</span>
+                <h2>Acompanhamento Lado a Lado</h2>
+            </div>
 
-                            <article class="carousel-item result-card">
-                                <div class="result-image-wrapper">
-                                    <img src="./image/resultado-2.jpeg" alt="Resultado de aluno 2" class="result-image">
-                                </div>
-                            </article>
+            <div class="carousel-wrapper">
+                <div class="carousel-track">
 
-                            <article class="carousel-item result-card">
-                                <div class="result-image-wrapper">
-                                   <img src="./image/resultado-3.jpeg" alt="Resultado de aluno 3" class="result-image">
+                    <article class="plan-card featured fade-up" style="transition-delay: 0.1s; min-width: 360px;">
+                        <span class="gender-highlight" style="border-color: transparent;">Atenção Máxima</span>
+                        <h3 class="plan-title">Individual</h3>
+                        
+                        <p style="font-size: 0.9rem; color: var(--text-secondary-color); margin-bottom: 25px; font-weight: 300; line-height: 1.5;">
+                            Acompanhamento completo, com correção em tempo real, execução adequada e evolução contínua.
+                        </p>
+                        
+                        <div style="text-align: left; border-top: 1px solid var(--border-glass); padding-top: 25px; margin-bottom: 20px;">
+                            <div style="margin-bottom: 20px;">
+                                <div style="font-weight: 600; color: var(--text-main-color); font-size: 1.05rem;">
+                                    2x por semana <span style="font-weight:300; font-size:0.75rem; color:var(--text-secondary-color); text-transform:uppercase; letter-spacing:1px; margin-left:5px;">(8 sessões/mês)</span>
                                 </div>
-                            </article>
-                            <article class="carousel-item result-card">
-                                <div class="result-image-wrapper">
-                                    <img src="./image/resultado-4.jpeg" alt="Resultado de aluno 4" class="result-image">
+                                <div class="plan-price" style="font-size: 2rem; margin: 5px 0 0;">R$ 1.120<span style="font-size: 1rem; color: var(--text-secondary-color);">/mês</span></div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary-color);">(R$ 140 por sessão)</div>
+                            </div>
+                            
+                            <div>
+                                <div style="font-weight: 600; color: var(--text-main-color); font-size: 1.05rem;">
+                                    3x por semana <span style="font-weight:300; font-size:0.75rem; color:var(--text-secondary-color); text-transform:uppercase; letter-spacing:1px; margin-left:5px;">(12 sessões/mês)</span>
                                 </div>
-                            </article>
-                            <article class="carousel-item result-card">
-                                <div class="result-image-wrapper">
-                                    <img src="./image/resultado-5.jpeg" alt="Resultado de aluno 5" class="result-image">
-                                </div>
-                            </article>
-                            <article class="carousel-item result-card">
-                                <div class="result-image-wrapper">
-                                    <img src="./image/resultado-6.jpeg" alt="Resultado de aluno 6" class="result-image">
-                                </div>
-                            </article>
-                            <article class="carousel-item result-card">
-                                <div class="result-image-wrapper">
-                                    <img src="./image/resultado-7.jpeg" alt="Resultado de aluno 7" class="result-image">
-                                </div>
-                            </article>
-                            <article class="carousel-item result-card">
-                                <div class="result-image-wrapper">
-                                    <img src="./image/resultado-8.jpeg" alt="Resultado de aluno 8" class="result-image">
-                                </div>
-                            </article>
+                                <div class="plan-price" style="font-size: 2rem; margin: 5px 0 0;">R$ 1.560<span style="font-size: 1rem; color: var(--text-secondary-color);">/mês</span></div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary-color);">(R$ 130 por sessão)</div>
+                            </div>
                         </div>
-                    </div>
-                    <button class="carousel-btn carousel-next"><i class="fas fa-chevron-right"></i></button>
+
+                        <div class="bonus-highlight" style="margin-bottom: 30px;">
+                            💡 Economia de R$ 120/mês ao optar por maior frequência
+                        </div>
+
+                        <button onclick="escolherPlano('Personal Presencial Individual')" class="btn-solid" style="margin-top: auto;">Consultar Agenda</button>
+                    </article>
+
+                    <article class="plan-card fade-up" style="transition-delay: 0.2s; min-width: 360px;">
+                        <span class="gender-highlight">Treino Compartilhado</span>
+                        <h3 class="plan-title">Duo</h3>
+                        
+                        <p style="font-size: 0.9rem; color: var(--text-secondary-color); margin-bottom: 25px; font-weight: 300; line-height: 1.5;">
+                            Treine com mais motivação e melhor custo-benefício.
+                        </p>
+                        
+                        <div style="text-align: left; border-top: 1px solid var(--border-glass); padding-top: 25px; margin-bottom: 20px;">
+                            <div style="margin-bottom: 20px;">
+                                <div style="font-weight: 600; color: var(--text-main-color); font-size: 1.05rem;">
+                                    2x por semana
+                                </div>
+                                <div class="plan-price" style="font-size: 2rem; margin: 5px 0 0;">R$ 760<span style="font-size: 1rem; color: var(--text-secondary-color);">/mês por pessoa</span></div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary-color);">(R$ 95 por sessão)</div>
+                            </div>
+                            
+                            <div>
+                                <div style="font-weight: 600; color: var(--text-main-color); font-size: 1.05rem;">
+                                    3x por semana
+                                </div>
+                                <div class="plan-price" style="font-size: 2rem; margin: 5px 0 0;">R$ 1.080<span style="font-size: 1rem; color: var(--text-secondary-color);">/mês por pessoa</span></div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary-color);">(R$ 90 por sessão)</div>
+                            </div>
+                        </div>
+
+                        <div class="bonus-highlight" style="margin-bottom: 30px; font-size: 0.8rem; text-align: left;">
+                            💡 Economia de R$ 60/mês por pessoa ao optar por 3x semana
+                        </div>
+
+                        <button onclick="escolherPlano('Personal Presencial Duo')" class="btn-outline" style="margin-top: auto;">Consultar Agenda</button>
+                    </article>
+
                 </div>
             </div>
         </section>
 
-        <section id="planos">
+        <section id="entregas">
             <div class="section-header fade-up">
-                <h2>Acompanhamento Presencial</h2>
-            </div>
-            <div class="plans-grid">
-                <article class="plan-card fade-up">
-                    <h3 class="plan-title">Mensal</h3>
-                    <div class="plan-price">R$ 249,00</div>
-                    <ul class="plan-features">
-                        <li><i class="fas fa-check"></i> Treino via APP Exclusivo</li>
-                        <li><i class="fas fa-check"></i> Avaliação Inicial</li>
-                    </ul>
-                    <button onclick="escolherPlano('Mensal Presencial')" class="btn-outline">Selecionar</button>
-                </article>
-                <article class="plan-card featured fade-up">
-                    <span class="plan-badge">O Mais Escolhido</span>
-                    <h3 class="plan-title">Trimestral</h3>
-                    <div class="plan-price">R$ 599,00</div>
-                    <ul class="plan-features">
-                        <li><i class="fas fa-check"></i> Suporte VIP no WhatsApp</li>
-                        <li><i class="fas fa-check"></i> Análise de Biomecânica</li>
-                        <li><i class="fas fa-check"></i> Ajustes de Treino</li>
-                    </ul>
-                    <button onclick="escolherPlano('Trimestral Presencial')" class="btn-solid">Quero este</button>
-                </article>
-                <article class="plan-card fade-up">
-                    <h3 class="plan-title">Semestral</h3>
-                    <div class="plan-price">R$ 899,00</div>
-                    <ul class="plan-features">
-                        <li><i class="fas fa-check"></i> Check-ins Constantes</li>
-                        <li><i class="fas fa-check"></i> Plano Focado a Médio Prazo</li>
-                    </ul>
-                    <button onclick="escolherPlano('Semestral Presencial')" class="btn-outline">Selecionar</button>
-                </article>
-            </div>
-        </section>
-
-        <section id="consultoria-online">
-            <div class="section-header fade-up">
-                <h2>Consultoria Online</h2>
-                <span class="section-subtitle subtitle-block">Para quem busca flexibilidade sem abrir mão de acompanhamento profissional.</span>
-            </div>
-            <div class="plans-grid">
-                <article class="plan-card fade-up">
-                    <h3 class="plan-title">Plano Mensal</h3>
-                    <div class="plan-price">R$ 497,00</div>
-                    <button onclick="escolherPlano('Mensal Online')" class="btn-outline plan-btn-align">Selecionar</button>
-                </article>
-                <article class="plan-card featured fade-up">
-                    <span class="plan-badge">Destaque</span>
-                    <h3 class="plan-title">Plano Trimestral</h3>
-                    <div class="plan-price">R$ 1.350,00</div>
-                    <button onclick="escolherPlano('Trimestral Online')" class="btn-solid plan-btn-align">Quero este</button>
-                </article>
-                <article class="plan-card fade-up">
-                    <h3 class="plan-title">Plano Semestral</h3>
-                    <div class="plan-price">R$ 2.400,00</div>
-                    <button onclick="escolherPlano('Semestral Online')" class="btn-outline plan-btn-align">Selecionar</button>
-                </article>
+                <span class="section-subtitle">Transparência</span>
+                <h2>Como Funciona</h2>
             </div>
 
-            <div class="card news-card fade-up online-news-card">
-                <div class="news-badge">Posicionamento Online</div>
-                <h2 class="news-title">Você não recebe apenas um treino.</h2>
-                <p class="news-subtext highlighted">Recebe:</p>
-                <div class="diferencial-list diferencial-list-center">
-                    <div class="diferencial-item">
-                        <i class="fas fa-compass"></i>
-                        <span>Direcionamento</span>
+            <div class="faq-container">
+                <details class="faq-item fade-up" style="transition-delay: 0.1s;">
+                    <summary>Alinhamento e Estratégia</summary>
+                    <div class="faq-body">
+                        Na primeira fase, traçamos a rota. Entendimento passo a passo de todo o processo de avaliação, prescrição e quais fatores serão determinantes para mantermos a sua consistência, sem negociações.
                     </div>
-                    <div class="diferencial-item">
-                        <i class="fas fa-sliders-h"></i>
-                        <span>Ajustes constantes</span>
+                </details>
+
+                <details class="faq-item fade-up" style="transition-delay: 0.15s;">
+                    <summary>Mapeamento Físico e Postural</summary>
+                    <div class="faq-body">
+                        Controle rigoroso das suas métricas corporais. Uma fundação sólida começa com dados reais para garantir que o treinamento seja perfeitamente desenhado para sua estrutura.
                     </div>
-                    <div class="diferencial-item">
-                        <i class="fas fa-headset"></i>
-                        <span>Suporte contínuo</span>
+                </details>
+
+                <details class="faq-item fade-up" style="transition-delay: 0.2s;">
+                    <summary>Análise Biomecânica Contínua</summary>
+                    <div class="faq-body">
+                        Para os clientes online, a análise de vídeos da execução garante que a ativação muscular esteja correta, prevenindo lesões e maximizando a quebra de fibras.
                     </div>
-                </div>
+                </details>
+
+                <details class="faq-item fade-up" style="transition-delay: 0.25s;">
+                    <summary>Tecnologia no Treinamento</summary>
+                    <div class="faq-body">
+                        Esqueça PDFs confusos. Você terá acesso a um aplicativo de ponta com sua rotina, vídeos institucionais de execução e interface para registro das suas cargas.
+                    </div>
+                </details>
             </div>
         </section>
 
         <section id="aplicacao">
-            <div class="section-header fade-up"><h2>Aplicar para o Time</h2></div>
+            <div class="section-header fade-up">
+                <span class="section-subtitle">O Primeiro Passo</span>
+                <h2>Aplicação Para Consultoria</h2>
+            </div>
+            
             <form class="card fade-up" onsubmit="enviarAnamnese(event)">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">Nome Completo</label>
-                        <input type="text" id="clientName" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Idade</label>
-                        <input type="number" id="clientAge" class="form-input" required min="10" max="100">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">Sexo</label>
-                        <select id="clientGender" class="form-select" required>
-                            <option value="" disabled selected>Selecione</option>
-                            <option value="Masculino">Masculino</option>
-                            <option value="Feminino">Feminino</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Dias de treino por semana</label>
-                        <select id="clientDays" class="form-select" required>
-                            <option value="" disabled selected>Selecione</option>
-                            <option value="2 a 3 dias">2 a 3 dias</option>
-                            <option value="4 a 5 dias">4 a 5 dias</option>
-                            <option value="6 a 7 dias">6 a 7 dias</option>
-                        </select>
-                    </div>
-                </div>
-
                 <div class="form-group">
-                    <label class="form-label">Qual Plano deseja?</label>
+                    <label class="form-label" for="planSelect">Interesse Inicial</label>
                     <select id="planSelect" class="form-select" required>
-                        <optgroup label="Acompanhamento Presencial">
-                            <option value="Mensal Presencial">Mensal Presencial</option>
-                            <option value="Trimestral Presencial">Trimestral Presencial</option>
-                            <option value="Semestral Presencial">Semestral Presencial</option>
+                        <option value="Ainda não decidi" selected>Desejo uma recomendação</option>
+                        <optgroup label="Online">
+                            <option value="Online Mensal">Online - Mensal</option>
+                            <option value="Online Trimestral">Online - Trimestral</option>
+                            <option value="Online Semestral">Online - Semestral VIP</option>
                         </optgroup>
-                        <optgroup label="Consultoria Online">
-                            <option value="Mensal Online">Mensal Online</option>
-                            <option value="Trimestral Online">Trimestral Online</option>
-                            <option value="Semestral Online">Semestral Online</option>
+                        <optgroup label="Presencial">
+                            <option value="Presencial Individual">Presencial Individual</option>
+                            <option value="Presencial Duo">Presencial Duo</option>
                         </optgroup>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Qual seu objetivo?</label>
-                    <textarea id="goalInput" class="form-input" placeholder="Ex: Ganho de massa muscular, emagrecimento, etc." required></textarea>
+                    <label class="form-label" for="clientName">Nome Completo</label>
+                    <input type="text" id="clientName" class="form-input" placeholder="Insira seu nome" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="clientAge">Idade</label>
+                        <input type="number" id="clientAge" class="form-input" placeholder="Idade" required min="14" max="100">
+                    </div>
+                     <div class="form-group">
+                        <label class="form-label" for="clientGender">Gênero</label>
+                        <select id="clientGender" class="form-select" required>
+                            <option value="Masculino" selected>Masculino</option>
+                            <option value="Feminino">Feminino</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                     <div class="form-group">
+                        <label class="form-label" for="levelSelect">Nível de Treinamento</label>
+                        <select id="levelSelect" class="form-select" required>
+                            <option value="Iniciante">Iniciante</option>
+                            <option value="Intermediário">Intermediário</option>
+                            <option value="Avançado">Avançado</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="trainingDays">Disponibilidade Semanal</label>
+                        <select id="trainingDays" class="form-select" required>
+                            <option value="2 dias">2 dias</option>
+                            <option value="3 dias" selected>3 dias</option>
+                            <option value="4 dias">4 dias</option>
+                            <option value="5 dias">5 dias</option>
+                            <option value="6 dias">6 dias</option>
+                            <option value="7 dias">7 dias</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Observações (Tem dores, lesões ou restrições?)</label>
-                    <textarea id="obsInput" class="form-input" placeholder="Conte-me se sente dores nos joelhos, coluna, etc..."></textarea>
+                    <label class="form-label" for="goalInput">Qual a sua meta primordial?</label>
+                    <textarea id="goalInput" class="form-input" placeholder="Seja detalhista sobre o que deseja alcançar fisicamente..." required></textarea>
                 </div>
 
-                <button type="submit" class="btn-solid">Enviar via WhatsApp</button>
+                <div class="form-group">
+                    <label class="form-label" for="painInput">Restrições ou Histórico de Lesões?</label>
+                    <input type="text" id="painInput" class="form-input" placeholder="Detalhe caso exista (Opcional)">
+                </div>
+
+                <button type="submit" class="btn-solid" style="margin-top: 20px;">
+                    Submeter Aplicação
+                </button>
             </form>
         </section>
 
-        <section id="resultado-final" class="resultado-final-section">
-            <div class="card news-card fade-up resultado-final-card">
-                <div class="news-badge">Resultado</div>
-                <h2 class="news-title resultado-final-title">Resultado não vem de sorte.</h2>
-                <p class="news-subtext highlighted mb-30">Vem de:</p>
-                
-                <div class="diferencial-list diferencial-list-center mb-50">
-                    <div class="diferencial-item">
-                        <i class="fas fa-dumbbell"></i>
-                        <span>Método</span>
-                    </div>
-                    <div class="diferencial-item">
-                        <i class="fas fa-sync-alt"></i>
-                        <span>Consistência</span>
-                    </div>
-                    <div class="diferencial-item">
-                        <i class="fas fa-check-double"></i>
-                        <span>Execução Correta</span>
-                    </div>
-                </div>
-
-                <hr class="custom-divider">
-
-                <h3 class="final-statement-heading">Seu corpo responde ao que você faz todos os dias.</h3>
-                <p class="final-statement-text">A diferença está em como você é orientado.</p>
-
-                <a href="https://wa.me/5511969908406" class="btn-solid btn-whatsapp-final">
-                    👉 Quero começar meu acompanhamento
-                </a>
+        <a href="https://wa.me/5511969908406" class="cta-final fade-up">
+            <h2 style="font-size: 2.4rem;">Seu corpo responde ao que você faz todos os dias.</h2>
+            <p>A diferença está em como você é orientado.</p>
+            <div class="cta-btn-inner">
+                <i class="fab fa-whatsapp"></i> Iniciar Contato
             </div>
-        </section>
+        </a>
 
     </main>
 
-    <footer>
-        <div class="footer-social-wrapper">
-            <a href="https://www.instagram.com/jeffpersonaall/" target="_blank" rel="noopener noreferrer" class="footer-social-link">
-                <i class="fab fa-instagram"></i>
-            </a>
+    <footer class="container fade-up">
+        <div class="footer-socials">
+            <a href="#" aria-label="Instagram do Jeff Espadin Personal"><i class="fab fa-instagram"></i></a>
         </div>
-        <p>&copy; 2026 Jefferson Personal. Todos os direitos reservados.</p>
-        <p style="margin-top:5px; opacity:0.5; font-size:0.7rem;">Desenvolvido pela <a href="https://www.instagram.com/coutinho.tech22/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">Coutinho Tech</a></p>
+        <p>&copy; 2026 Jeff Espadin Personal Trainer. All rights reserved.</p>
     </footer>
-    <script src="./js/script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, observerOptions);
+
+            const fadeElements = document.querySelectorAll('.fade-up');
+            fadeElements.forEach(el => observer.observe(el));
+        });
+
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('light-theme');
+            const icon = document.querySelector('.theme-toggle i');
+            
+            if(body.classList.contains('light-theme')){ 
+                icon.classList.replace('fa-sun', 'fa-moon'); 
+                localStorage.setItem('theme-jefferson', 'light'); 
+            } else { 
+                icon.classList.replace('fa-moon', 'fa-sun'); 
+                localStorage.setItem('theme-jefferson', 'dark'); 
+            }
+        }
+        
+        if(localStorage.getItem('theme-jefferson') === 'light' || 
+          (!localStorage.getItem('theme-jefferson') && window.matchMedia('(prefers-color-scheme: light)').matches)) { 
+            document.body.classList.add('light-theme'); 
+            document.querySelector('.theme-toggle i').classList.replace('fa-sun', 'fa-moon'); 
+        }
+
+        function toggleShareMenu() {
+            const menu = document.getElementById('shareMenu');
+            menu.classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(event) {
+            const shareContainer = document.querySelector('.share-container');
+            const shareMenu = document.getElementById('shareMenu');
+            if (!shareContainer.contains(event.target) && shareMenu.classList.contains('active')) {
+                shareMenu.classList.remove('active');
+            }
+        });
+
+        function shareLink(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent('Confira esta consultoria de alto nível: ');
+            
+            if (platform === 'whatsapp') { window.open(`https://api.whatsapp.com/send?text=${text}${url}`, '_blank'); }
+            else if (platform === 'facebook') { window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank'); }
+            else {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert(`Link copiado com sucesso!`);
+                    document.getElementById('shareMenu').classList.remove('active');
+                });
+            }
+        }
+
+        function enviarAnamnese(event) {
+            event.preventDefault(); 
+            const plano = document.getElementById('planSelect').value;
+            const nome = document.getElementById('clientName').value;
+            const idade = document.getElementById('clientAge').value;
+            const sexo = document.getElementById('clientGender').value;
+            const nivel = document.getElementById('levelSelect').value;
+            const dias = document.getElementById('trainingDays').value;
+            const objetivo = document.getElementById('goalInput').value;
+            const dores = document.getElementById('painInput').value;
+            
+            const mensagem = `*APLICAÇÃO RECEBIDA - SITE*%0A%0A*Nome:* ${nome}%0A*Idade:* ${idade} anos%0A*Gênero:* ${sexo}%0A*Nível:* ${nivel}%0A*Rotina:* ${dias}%0A*Interesse:* ${plano}%0A%0A*OBJETIVO PRINCIPAL:*%0A${objetivo}%0A%0A*RESTRIÇÕES:*%0A${dores ? dores : 'Nenhuma relatada'}`;
+            window.open(`https://wa.me/5511969908406?text=${mensagem}`, '_blank');
+        }
+
+        function escolherPlano(plano) {
+            const mensagem = `Olá Jeff, tenho interesse no projeto *${plano}*. Podemos conversar sobre os detalhes?`;
+            window.open(`https://wa.me/5511969908406?text=${mensagem}`, '_blank');
+        }
+    </script>
 </body>
 </html>
