@@ -214,51 +214,19 @@
                 <h2>Projetos de Evolução</h2>
             </div>
 
-            <div class="carousel-wrapper">
-                <div class="carousel-track">
-                    
-                    <article class="plan-card fade-up" style="transition-delay: 0.1s;">
-                        <span class="gender-highlight">Ciclo: Mensal</span>
-                        <h3 class="plan-title">Start</h3>
-                        <div class="plan-price">R$ 399</div>
-                        <div class="plan-price-sub">Pagamento Único</div> 
-                        <ul class="plan-features">
-                            <li><i class="fas fa-check"></i> Anamnese e Planejamento</li>
-                            <li><i class="fas fa-check"></i> Treino personalizado via App</li>
-                            <li><i class="fas fa-check"></i> Suporte convencional</li>
-                        </ul>
-                        <button onclick="escolherPlano('Plano Online Mensal')" class="btn-outline">Selecionar Projeto</button>
-                    </article>
-
-                    <article class="plan-card fade-up" style="transition-delay: 0.2s;">
-                        <span class="gender-highlight">Ciclo: Trimestral</span>
-                        <h3 class="plan-title">Prime</h3>
-                        <div class="plan-price">R$ 1.050</div>
-                        <div class="plan-price-sub">Equivale a R$ 350/mês</div>
-                        <ul class="plan-features">
-                            <li><i class="fas fa-check"></i> Todos os benefícios do Start</li>
-                            <li><i class="fas fa-check"></i> Periodização Completa</li>
-                            <li><i class="fas fa-check"></i> Acompanhamento Próximo</li>
-                        </ul>
-                        <button onclick="escolherPlano('Plano Online Trimestral')" class="btn-outline">Selecionar Projeto</button>
-                    </article>
-
-                    <article class="plan-card featured fade-up" style="transition-delay: 0.3s;">
-                        <span class="plan-badge">Resultados Máximos</span>
-                        <span class="gender-highlight gender-highlight-transparent">Ciclo: Semestral</span>
-                        <h3 class="plan-title">Elite</h3>
-                        <div class="plan-price">R$ 1.800</div>
-                        <div class="plan-price-sub">Equivale a R$ 300/mês</div>
-                        <ul class="plan-features">
-                            <li><i class="fas fa-check"></i> Mapeamento de Performance</li>
-                            <li><i class="fas fa-check"></i> Troca de ciclos estratégica</li>
-                            <li><i class="fas fa-check"></i> Prioridade Máxima Suporte</li>
-                            <span class="bonus-highlight">💡 Economia de R$ 594 comparado ao mensal</span>
-                        </ul>
-                        <button onclick="escolherPlano('Plano Online Semestral')" class="btn-solid">Selecionar Projeto</button>
-                    </article>
-
-                </div>
+            <div style="padding: 10px 0 40px 0; display: flex; justify-content: center;">
+                <article class="plan-card featured fade-up" style="max-width: 400px; width: 100%; transition-delay: 0.1s;">
+                    <span class="gender-highlight gender-highlight-transparent">Ciclo: Mensal</span>
+                    <h3 class="plan-title">Start</h3>
+                    <div class="plan-price">R$ 399</div>
+                    <div class="plan-price-sub">Pagamento Único</div> 
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Anamnese e Planejamento</li>
+                        <li><i class="fas fa-check"></i> Treino personalizado via App</li>
+                        <li><i class="fas fa-check"></i> Suporte convencional</li>
+                    </ul>
+                    <button onclick="escolherPlano('Plano Online Mensal')" class="btn-solid">Selecionar Projeto</button>
+                </article>
             </div>
         </section>
 
@@ -327,24 +295,21 @@
                                 <div class="presencial-freq">
                                     2x por semana <span>(8 sessões/mês)</span>
                                 </div>
-                                <div class="plan-price presencial-price">R$ 1.440<span>/mês</span></div>
-                                <div class="presencial-unit">(R$ 180 por sessão)</div>
+                                <div class="plan-price presencial-price">R$ 180<span>/sessão</span></div>
                             </div>
                             
                             <div class="presencial-option">
                                 <div class="presencial-freq">
                                     3x por semana <span>(12 sessões/mês)</span>
                                 </div>
-                                <div class="plan-price presencial-price">R$ 1.920<span>/mês</span></div>
-                                <div class="presencial-unit">(R$ 160 por sessão)</div>
+                                <div class="plan-price presencial-price">R$ 160<span>/sessão</span></div>
                             </div>
 
                             <div class="presencial-option">
                                 <div class="presencial-freq">
                                     5x por semana <span>(20 sessões/mês)</span>
                                 </div>
-                                <div class="plan-price presencial-price">R$ 3.000<span>/mês</span></div>
-                                <div class="presencial-unit">(R$ 150 por sessão)</div>
+                                <div class="plan-price presencial-price">R$ 150<span>/sessão</span></div>
                             </div>
                         </div>
 
@@ -368,16 +333,14 @@
                                 <div class="presencial-freq">
                                     2x por semana
                                 </div>
-                                <div class="plan-price presencial-price">R$ 760<span>/mês por pessoa</span></div>
-                                <div class="presencial-unit">(R$ 95 por sessão)</div>
+                                <div class="plan-price presencial-price">R$ 95<span>/sessão por pessoa</span></div>
                             </div>
                             
                             <div class="presencial-option">
                                 <div class="presencial-freq">
                                     3x por semana
                                 </div>
-                                <div class="plan-price presencial-price">R$ 1.080<span>/mês por pessoa</span></div>
-                                <div class="presencial-unit">(R$ 90 por sessão)</div>
+                                <div class="plan-price presencial-price">R$ 90<span>/sessão por pessoa</span></div>
                             </div>
                         </div>
 
@@ -442,8 +405,6 @@
                         <option value="Ainda não decidi" selected>Desejo uma recomendação</option>
                         <optgroup label="Online">
                             <option value="Online Mensal">Online - Mensal</option>
-                            <option value="Online Trimestral">Online - Trimestral</option>
-                            <option value="Online Semestral">Online - Semestral VIP</option>
                         </optgroup>
                         <optgroup label="Presencial">
                             <option value="Presencial Individual">Presencial Individual</option>
